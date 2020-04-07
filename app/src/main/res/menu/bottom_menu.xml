@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorPrimary"
+
+    >
+    <item android:id="@+id/Uncategorize"
+        android:title="Uncategorize"
+        android:icon="@drawable/cate"
+        app:showAsAction="always"/>
+<item android:id="@+id/work"
+    android:title="Work"
+    android:icon="@drawable/busines"
+    app:showAsAction=""/>
+    <item android:id="@+id/family"
+        android:title=""
+        android:icon="@drawable/hommme"
+        app:showAsAction="always"/>
+    <item android:id="@+id/study"
+    android:title="Study"
+    android:icon="@drawable/book"
+    app:showAsAction="always"/>
+    <item android:id="@+id/personal"
+        android:title="Personal"
+        android:icon="@drawable/male"
+        app:showAsAction="always"/>
+
+
+
+
+</menu>

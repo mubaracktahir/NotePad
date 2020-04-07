@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.AddNewNote">
+
+    <EditText
+        android:id="@+id/describtion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toollay"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/white"
+        android:gravity="start"
+        android:hint="Type note"
+        android:layout_above="@+id/bnb"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+<include
+    android:id="@+id/toollay"
+    layout="@layout/toolbar_layout"/>
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/bnb"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:addStatesFromChildren="true"
+
+        android:animateLayoutChanges="false"
+        android:background="@android:color/white"
+        app:elevation="0dp"
+        app:menu="@menu/bottom_menu">
+
+    </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
+</RelativeLayout>
