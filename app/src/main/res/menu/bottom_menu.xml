@@ -13,7 +13,7 @@
     android:icon="@drawable/busines"
     app:showAsAction=""/>
     <item android:id="@+id/family"
-        android:title=""
+        android:title="Home"
         android:icon="@drawable/hommme"
         app:showAsAction="always"/>
     <item android:id="@+id/study"

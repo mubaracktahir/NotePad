@@ -10,7 +10,7 @@ public class Note {
     private final String DESCRIOTION = "description";
     private final String DATE = "date";
     private final String CATEGORY ="category";
-    JSONObject jsonObject;
+
     public Note(){
 
     }
@@ -24,7 +24,7 @@ public class Note {
         object.put(DESCRIOTION,description);
         object.put(DATE,date);
         object.put(CATEGORY,category);
-        return jsonObject;
+        return object;
     }
 
     public Note(JSONObject jsonObject) throws  JSONException{

@@ -19,12 +19,17 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter {
     public static final String TAG = "JSONSERIALIZER";
     public List<Note> notes;
-    int a = 100;
     private Context context;
+
+
     public ListAdapter(List<Note> notes, Context context) {
 
         this.context = context;
+
+        // updating the adapter with the available notes
         this.notes = notes;
+
+
 
     }
 
@@ -45,6 +50,8 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
+        //setting the value of the listview
         Note note = notes.get(i);
         if (view == null)
             view = LayoutInflater.from(context).inflate(R.layout.view_list, viewGroup, false);
@@ -78,28 +85,4 @@ public class ListAdapter extends BaseAdapter {
         return view;
 
     }
-
-    public void addNewNote(Note note, final int REQUEST, int index) {
-        if (REQUEST == 1) {
-            //notes.add(new Note("Mubby","34:54",MainActivity.PERSONAL));
-
-            notes.add(0, note);
-            Log.e(TAG, "new not added with request code 1");
-            notifyDataSetChanged();
-
-        }
-        if (REQUEST == 2) {
-            notes.remove(index);
-            notes.add(index, note);
-            Log.e(TAG, "new not added with request code 2)");
-
-        }
-        notifyDataSetChanged();
-
-    }
-
-    public void delete(Note note) {
-        notes.remove(note);
-    }
-
 }

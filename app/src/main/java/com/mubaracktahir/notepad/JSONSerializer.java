@@ -28,7 +28,6 @@ import java.util.List;
 public class JSONSerializer {
     private String mFileName;
     public static final String TAG = "JSONSERIALIZER";
-    Gson gson;
 
     // this is used to deserialize the file from the disk
 
@@ -41,7 +40,6 @@ public class JSONSerializer {
     public JSONSerializer(String mFileName, Context mContext){
         this.mFileName = mFileName;
         this.mContext = mContext;
-        gson = new Gson();
     }
 
     //the function below is used to save Object of type note to the disk
@@ -59,7 +57,7 @@ public class JSONSerializer {
             for (Note n : note) {
 
 
-                jArray.put(gson.toJson(n));
+                jArray.put(n.convertToJSON());
                 Log.e(TAG,jArray.toString());
 
             }
@@ -71,6 +69,11 @@ public class JSONSerializer {
             Log.e(TAG,"File saved successfully!");
         }catch (Exception e){
             Log.e(TAG,"Unable to save file!");
+        }finally {
+            //  if ( writer != null;){
+            writer.close();
+
+            // }
         }
     }
 
@@ -81,7 +84,7 @@ public class JSONSerializer {
 
         try {
 
-            InputStream in = mContext.openFileInput("NotePad.json");
+            InputStream in = mContext.openFileInput(mFileName);
             bufferedReader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();
 
@@ -100,7 +103,7 @@ public class JSONSerializer {
 
 
 
-            JSONArray jsonArray = new JSONArray(jsonString.toString());
+            JSONArray jsonArray = (JSONArray)new JSONTokener(jsonString.toString()).nextValue();
             Log.e(TAG," " +jsonArray.length());
             Log.e(TAG,"loaded successfully");
 
@@ -114,6 +117,11 @@ public class JSONSerializer {
 
             Log.e(TAG,"Unable to load notes!");
 
+        }finally {
+            //  if ( writer != null;){
+            bufferedReader.close();
+
+            // }
         }
         return noteList;
 

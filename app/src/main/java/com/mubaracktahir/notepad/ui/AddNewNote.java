@@ -85,8 +85,6 @@ public class AddNewNote extends AppCompatActivity {
             if (!TextUtils.isEmpty(editText.getText()))
             {
                 Note note = new Note();
-
-
                 note.setDescription(editText.getText().toString());
                 note.setCategory(option);
                 note.setDate("3:40 pm");
@@ -141,6 +139,13 @@ public class AddNewNote extends AppCompatActivity {
         toast.show();
     }
     public void setUpBottomNav(){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View vw = layoutInflater.inflate(R.layout.customtoastlayout, findViewById(R.id.custom_layout));
+        TextView txt = vw.findViewById(R.id.txt);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(vw);
+        toast.setGravity(Gravity.CENTER, 0, 100);
             bottomNavigationViewEx = findViewById(R.id.bnb);
         BNVUtils.setUpProperties(bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
@@ -149,34 +154,38 @@ public class AddNewNote extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Uncategorize:
-                        Toast.makeText(getApplicationContext(),item.getTitle(),Toast.LENGTH_LONG).show();
+                        txt.setText(item.getTitle());
+                        toast.show();
                         MenuItem menuItem0 = menu.getItem(0);
                         menuItem0.setCheckable(true);
                         option = MainActivity.UNCAT;
                         break;
                     case R.id.work:
-                        Toast.makeText(getApplicationContext(),item.getTitle(),Toast.LENGTH_LONG).show();
-
+                        txt.setText(item.getTitle());
+                        toast.show();
                         MenuItem menuItem1 = menu.getItem(1);
                         menuItem1.setCheckable(true);
                         option = MainActivity.WORK;
 
                         break;
                     case R.id.family:
-                        Toast.makeText(getApplicationContext(),item.getTitle(),Toast.LENGTH_LONG).show();
+                        txt.setText(item.getTitle());
+                        toast.show();
                         MenuItem menuItem2 = menu.getItem(2);
                         menuItem2.setCheckable(true);
                         option = MainActivity.FAMILY;
                         break;
                     case R.id.study:
-                        Toast.makeText(getApplicationContext(),item.getTitle(),Toast.LENGTH_LONG).show();
+                        txt.setText(item.getTitle());
+                        toast.show();
 
                         MenuItem menuItem3 = menu.getItem(3);
                         menuItem3.setCheckable(true);
                         option = MainActivity.STUDY;
                         break;
                     case R.id.personal:
-                        Toast.makeText(getApplicationContext(),item.getTitle(),Toast.LENGTH_LONG).show();
+                        txt.setText(item.getTitle());
+                        toast.show();
 
                         MenuItem menuItem4 = menu.getItem(4);
                         menuItem4.setCheckable(true);
