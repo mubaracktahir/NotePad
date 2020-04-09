@@ -53,27 +53,39 @@ public class ListAdapter extends BaseAdapter {
 
         //setting the value of the listview
         Note note = notes.get(i);
-        if (view == null)
+        if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.view_list, viewGroup, false);
-
+        }
         View v = view.findViewById(R.id.view);
         TextView description = view.findViewById(R.id.description);
         TextView category = view.findViewById(R.id.category);
         TextView date = view.findViewById(R.id.date);
-        if (note.getCategory() == MainActivity.UNCAT) {
+        if (!(note.getCategory() .equals( MainActivity.UNCAT))){
+
+        }
+        else{
             v.setBackgroundColor(Color.parseColor("#5BFD74"));
             category.setTextColor(Color.parseColor("#5BFD74"));
-        } else if (note.getCategory() == MainActivity.STUDY) {
+        }
+        if (!(note.getCategory() .equals( MainActivity.STUDY)) ){
 
+        }else{
             v.setBackgroundColor(Color.parseColor("#69A3F3"));
             category.setTextColor(Color.parseColor("#69A3F3"));
-        } else if (note.getCategory() == MainActivity.WORK) {
+        }  if (!(note.getCategory() .equals( MainActivity.WORK) )) {
+
+        }
+        else{
             v.setBackgroundColor(Color.parseColor("#AA00FF"));
             category.setTextColor(Color.parseColor("#AA00FF"));
-        } else if (note.getCategory() == MainActivity.FAMILY) {
+        } if (!(note.getCategory() .equals( MainActivity.FAMILY))) {
+
+        }else{
             v.setBackgroundColor(Color.parseColor("#F00057"));
             category.setTextColor(Color.parseColor("#F00057"));
-        } else if (note.getCategory() == MainActivity.PERSONAL) {
+        }  if (!(note.getCategory() .equals( MainActivity.PERSONAL) )) {
+
+        }else{
             v.setBackgroundColor(Color.parseColor("#FFAB00"));
             category.setTextColor(Color.parseColor("#FFAB00"));
         }
@@ -81,7 +93,7 @@ public class ListAdapter extends BaseAdapter {
         description.setText(note.getDescription());
         category.setText(note.getCategory());
         date.setText(note.getDate());
-
+        notifyDataSetChanged();
         return view;
 
     }

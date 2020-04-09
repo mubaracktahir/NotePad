@@ -16,7 +16,7 @@
         android:text="Uncategorize"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/holo_green_light"
+        android:textColor="#5BFD74"
         android:textSize="12sp"
         android:id="@+id/cat"/>
     <TextView

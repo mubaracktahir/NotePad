@@ -51,8 +51,8 @@ public class ShowNote extends AppCompatActivity {
         date.setText(dat);
         cat.setText(cate);
 
-        Log.e(TAG,color);
-//        cat.setTextColor(Color.parseColor(color));
+//        Log.e(TAG,color);
+  cat.setTextColor(Color.parseColor(color));
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
