@@ -10,5 +10,4 @@
     android:orderInCategory="100"
     app:showAsAction="always"
     android:id="@+id/delete"/>
-
 </menu>
