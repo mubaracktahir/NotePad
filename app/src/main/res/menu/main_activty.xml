@@ -15,4 +15,9 @@
         android:id="@+id/sort_tabs"
         app:showAsAction="never"
         />
+    <item android:title="Backup notes"
+        android:id="@+id/cloud"
+        app:showAsAction="never"
+        />
+
 </menu>

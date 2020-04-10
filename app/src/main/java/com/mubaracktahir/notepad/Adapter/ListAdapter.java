@@ -2,14 +2,12 @@ package com.mubaracktahir.notepad.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.mubaracktahir.notepad.JSONSerializer;
 import com.mubaracktahir.notepad.Model.Note;
 import com.mubaracktahir.notepad.R;
 import com.mubaracktahir.notepad.ui.MainActivity;
@@ -28,7 +26,6 @@ public class ListAdapter extends BaseAdapter {
 
         // updating the adapter with the available notes
         this.notes = notes;
-
 
 
     }
@@ -60,32 +57,19 @@ public class ListAdapter extends BaseAdapter {
         TextView description = view.findViewById(R.id.description);
         TextView category = view.findViewById(R.id.category);
         TextView date = view.findViewById(R.id.date);
-        if (!(note.getCategory() .equals( MainActivity.UNCAT))){
-
-        }
-        else{
+        if (note.getCategory().equals(MainActivity.UNCAT)) {
             v.setBackgroundColor(Color.parseColor("#5BFD74"));
             category.setTextColor(Color.parseColor("#5BFD74"));
-        }
-        if (!(note.getCategory() .equals( MainActivity.STUDY)) ){
-
-        }else{
+        } else if (note.getCategory().equals(MainActivity.STUDY)) {
             v.setBackgroundColor(Color.parseColor("#69A3F3"));
             category.setTextColor(Color.parseColor("#69A3F3"));
-        }  if (!(note.getCategory() .equals( MainActivity.WORK) )) {
-
-        }
-        else{
+        } else if (note.getCategory().equals(MainActivity.WORK)) {
             v.setBackgroundColor(Color.parseColor("#AA00FF"));
             category.setTextColor(Color.parseColor("#AA00FF"));
-        } if (!(note.getCategory() .equals( MainActivity.FAMILY))) {
-
-        }else{
+        } else if (note.getCategory().equals(MainActivity.FAMILY)) {
             v.setBackgroundColor(Color.parseColor("#F00057"));
             category.setTextColor(Color.parseColor("#F00057"));
-        }  if (!(note.getCategory() .equals( MainActivity.PERSONAL) )) {
-
-        }else{
+        } else if (note.getCategory().equals(MainActivity.PERSONAL)) {
             v.setBackgroundColor(Color.parseColor("#FFAB00"));
             category.setTextColor(Color.parseColor("#FFAB00"));
         }

@@ -6,6 +6,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+
+import com.mubaracktahir.notepad.R;
 
 public class Tools {
 
@@ -14,7 +17,9 @@ public class Tools {
             Window window = act.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(act.getResources().getColor(color));
+            window.setStatusBarColor(ContextCompat.getColor(act.getApplicationContext(),color));
+            
+
         }
     }
 
