@@ -1,15 +1,18 @@
 package com.mubaracktahir.notepad.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -29,12 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mubaracktahir.notepad.R;
 
 public class LogInActivity extends AppCompatActivity {
+    private static final int RC_SIGN_IN = 1;
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInOptions gso;
+    private DatabaseReference databaseReference;
     private SignInButton mSignInBtn;
-    private static final int RC_SIGN_IN = 1;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +48,21 @@ public class LogInActivity extends AppCompatActivity {
         mSignInBtn = findViewById(R.id.googleSignUp);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null) {
+                    Intent intent = new Intent(LogInActivity.this, CloudActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(),R.color.transwhite));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.transwhite));
         }
         mSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +74,9 @@ public class LogInActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -72,6 +90,7 @@ public class LogInActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             progressDialog.setMessage("Signin with Google...");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -86,6 +105,7 @@ public class LogInActivity extends AppCompatActivity {
             }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         // Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
@@ -100,22 +120,38 @@ public class LogInActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             FirebaseUser user = mAuth.getCurrentUser();
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-
+                            DatabaseReference mRef = databaseReference.child(user.getUid());
                             String name = user.getDisplayName();
-                            Uri uri = user.getPhotoUrl();
+                            Log.e("LoginActivity", "welcome" + name);
 
-                            databaseReference.child("name").setValue(name);
-                            databaseReference.child("image").setValue(uri.toString());
+                            Uri uri = user.getPhotoUrl();
+                            Dialog dialog = new Dialog(getApplicationContext());
+
+                            mRef.child("name").setValue(name);
+                            mRef.child("image").setValue(uri.toString());
                             progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Signed in successfully welcome" + name, Toast.LENGTH_LONG).show();
+
+                            Intent in = new Intent(LogInActivity.this, CloudActivity.class);
+                            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(in);
+                            finish();
                             // updateUI(user);
                         } else {
 
+                            Toast.makeText(getApplicationContext(), "Unable to coonect", Toast.LENGTH_LONG).show();
 
                         }
 
 
                     }
                 });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(authStateListener);
     }
 }
