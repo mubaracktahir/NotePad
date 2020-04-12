@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Toast.makeText(this, "file does not exist", Toast.LENGTH_LONG).show();
             notes = new ArrayList<>();
         }
-        GridLayoutManager linearLayoutManager = new GridLayoutManager(this,2);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.setHasFixedSize(true);
 
