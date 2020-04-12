@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFAB00</color>
+    <color name="colorPrimaryDark">#FFAB00</color>
+    <color name="colorAccent">#FFAB00</color>
+    <color name="uncatcolor">#5BFD74</color>
+    <color name="catcolor">#FFD600</color>
+    <color name="school">#69A3F3</color>
+    <color name="workcolor">#64DD17</color>
+    <color name="black">#494747</color>
+    <color name="blue">#4A66E4</color>
+    <color name="white">#FAF9F9</color>
+    <color name="transwhite">#FCFFFFFF</color>
+
+
+</resources>

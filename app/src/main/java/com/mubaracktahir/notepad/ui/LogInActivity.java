@@ -31,7 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mubaracktahir.notepad.R;
 
-public class LogInActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity  {
     private static final int RC_SIGN_IN = 1;
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInOptions gso;
@@ -154,4 +154,6 @@ public class LogInActivity extends AppCompatActivity {
 
         mAuth.addAuthStateListener(authStateListener);
     }
+
+
 }

@@ -7,6 +7,7 @@
     <item android:id="@+id/Uncategorize"
         android:title="Uncategorize"
         android:icon="@drawable/cate"
+        android:iconTint="@android:color/holo_green_light"
         app:showAsAction="always"/>
 <item android:id="@+id/work"
     android:title="Work"
