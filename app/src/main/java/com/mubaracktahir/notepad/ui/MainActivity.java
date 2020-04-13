@@ -17,12 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
 import com.mubaracktahir.notepad.Adapter.RecyclerViewAdapter;
 import com.mubaracktahir.notepad.JSONSerializer;
 import com.mubaracktahir.notepad.Model.Note;
@@ -34,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
-    boolean is_in_action_mode = false;
     public final static String DESC_KEY = "description";
     public final static String ITEM_KEY = "index";
     public final static String UNCAT = "Uncategorized";
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     static List<Note> notes;
     public final String REQUEST = "request";
     public final int DISPLAY = 1;
-    public DatabaseReference rootDB;
     LinearLayout deleteIcon;
     ActionMode actionMode = null;
     ActionModeCallback actionModeCallback;

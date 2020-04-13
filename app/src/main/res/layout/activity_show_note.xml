@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.ShowNote">
-    <include
-        layout="@layout/toolbar2_layout"
-        android:id="@+id/toolbar2"/>
-    <TextView
-        android:layout_below="@+id/toolbar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Uncategorize"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#5BFD74"
-        android:textSize="12sp"
-        android:id="@+id/cat"/>
-    <TextView
-        android:textSize="12sp"
-        android:layout_below="@+id/toolbar2"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/cat"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:text="Uncategorize"
-        android:id="@+id/date"/>
 
-    <TextView
-        android:id="@+id/textdesc"
+    <include
+        android:id="@+id/toolbar2"
+        layout="@layout/toolbar2_layout" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cat"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:enabled="false"
-        android:filterTouchesWhenObscured="true"
-        android:onClick="dostuff"
-        android:text="desc"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Uncategorize"
+                android:textColor="#5BFD74"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/cat"
+                android:text="Uncategorize"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cat"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:clickable="true"
+                android:enabled="false"
+                android:filterTouchesWhenObscured="true"
+                android:onClick="dostuff"
+                android:text="desc"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pen"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:src="@drawable/pen" />
 </RelativeLayout>
