@@ -21,6 +21,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/upload"
+            android:background="@drawable/listripple"
+            app:cardCornerRadius="10dp"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
@@ -56,11 +58,14 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/retrieve"
+            app:cardCornerRadius="10dp"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
+
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/listripple"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,11 +95,11 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/signout"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="logout"
             android:text="Log out"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

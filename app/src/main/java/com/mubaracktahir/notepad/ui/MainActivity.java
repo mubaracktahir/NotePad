@@ -321,8 +321,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(((CheckBox)view).isChecked()){
             recyclerviewAdapter.toggleSelection(position);
         }
-
-
     }
     private void deleteNotes() {
         List<Integer> selectedItemPositions = recyclerviewAdapter.getSelectedItems();

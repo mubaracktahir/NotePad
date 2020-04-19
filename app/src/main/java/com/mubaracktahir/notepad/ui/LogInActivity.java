@@ -48,7 +48,7 @@ public class LogInActivity extends AppCompatActivity  {
         mSignInBtn = findViewById(R.id.googleSignUp);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("user");
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -89,9 +89,7 @@ public class LogInActivity extends AppCompatActivity  {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            progressDialog.setMessage("Signin with Google...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
@@ -111,7 +109,9 @@ public class LogInActivity extends AppCompatActivity  {
         // [START_EXCLUDE silent]
         // showProgressBar();
         // [END_EXCLUDE]
-
+        progressDialog.setMessage("Signin with Google...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -123,10 +123,8 @@ public class LogInActivity extends AppCompatActivity  {
                             DatabaseReference mRef = databaseReference.child(user.getUid());
                             String name = user.getDisplayName();
                             Log.e("LoginActivity", "welcome" + name);
-
                             Uri uri = user.getPhotoUrl();
                             Dialog dialog = new Dialog(getApplicationContext());
-
                             mRef.child("name").setValue(name);
                             mRef.child("image").setValue(uri.toString());
                             progressDialog.dismiss();
@@ -151,8 +149,7 @@ public class LogInActivity extends AppCompatActivity  {
     @Override
     protected void onStart() {
         super.onStart();
-
-        mAuth.addAuthStateListener(authStateListener);
+       mAuth.addAuthStateListener(authStateListener);
     }
 
 
