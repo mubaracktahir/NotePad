@@ -80,7 +80,7 @@ licenses:
   - 'android-sdk-preview-license-.+'
 
 script:
-  - ./gradlew runUnitTests
-  - ./gradlew connectedCheck
+  - ./gradlew dependencyCheckAnalyze build
+  - ./gradlew connectedCheck PdisablePreDex --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
