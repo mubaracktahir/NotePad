@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mubaracktahir.notepad.Adapter.RecyclerViewAdapter;
-import com.mubaracktahir.notepad.JSONSerializer;
+import com.mubaracktahir.notepad.data.JSONSerializer;
 import com.mubaracktahir.notepad.Model.Note;
 import com.mubaracktahir.notepad.R;
 import com.mubaracktahir.notepad.Utils.Tools;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String TAG = "MAINACTIVITY";
     public static RecyclerViewAdapter recyclerviewAdapter;
     public static boolean isActionmodeEnabled = false;
-    static List<Note> notes;
+    static ArrayList<Note> notes;
     public final String REQUEST = "request";
     public final int DISPLAY = 1;
     LinearLayout deleteIcon;
@@ -71,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 deleteNotes();
             }
         });
-        jsonSerializer = new JSONSerializer("NotePad.json" +
-                "", this);
+        jsonSerializer = new JSONSerializer("NotePad.json", this);
 
-
+        Toast.makeText(this,"i got here ",Toast.LENGTH_LONG).show();
         if (jsonSerializer.isFilePresent())
 
             // initializing the list of notes.
@@ -206,10 +205,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (REQUEST == 1) {
             notes.add(0, note);
             recyclerviewAdapter.notifyDataSetChanged();
-        } else {
+        } else if(REQUEST == 2) {
             notes.remove(index);
             notes.add(index, note);
             recyclerviewAdapter.notifyDataSetChanged();
+        }
+        else if (REQUEST == 3){
+            notes.add(note);
         }
         recyclerviewAdapter.notifyDataSetChanged();
     }
@@ -236,8 +238,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override

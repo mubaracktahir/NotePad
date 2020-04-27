@@ -1,19 +1,15 @@
-package com.mubaracktahir.notepad;
+package com.mubaracktahir.notepad.data;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.mubaracktahir.notepad.Model.Note;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONTokener;
 
+import com.mubaracktahir.notepad.Model.Note;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
