@@ -1,53 +1,42 @@
+---
 language: android
 jdk: oraclejdk8
+sudo: false
+os: linux
+dist: trusty
+
+branches:
+  only:
+    - master
+    - dev
+
 env:
   global:
-    - ANDROID_API_LEVEL=29
-    - ANDROID_BUILD_TOOLS_VERSION=29.0.1
-    - ADB_INSTALL_TIMEOUT=20
+    - ANDROID_TARGET=android-28
     - ANDROID_ABI=armeabi-v7a
-    - ANDroID_TAG=google_apis
-    - ANDROID_EMULATOR_LEVEL=18
-    - QEMU_AUDIO_DRV=none
+
 android:
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
   components:
     - tools
     - platform-tools
-    - tools
-    # The BuildTools version used by your project
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    # The SDK version used to compile your project
-    - android-$ANDROID_API_LEVEL
-    - android=$ANDROID_EMULATOR_LEVEL
-    # Additional components
-    - etra-android-support
-    - extra-google-google_play_services
+    - build-tools-29.0.1
+    - android-29
     - extra-google-m2repository
     - extra-android-m2repository
-    ##- addon-google_apis-google-$ANDROID_API_LEVEL
-    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMULATOR_LEVEL
-cache:
-  directories:
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
-    - "$HOME/.android/build-cache/"
+    - extra-android-support
 
-before_script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-window &
-  - andriod-wait-for-emulator
-  - adb shell input keyevent 82 &
-  
-  # Prepare pre-accepted licenses to not be promted at installation
-  ##- mkdir -p "$ANDROID_HOME/licenses"
-  ##- cp ./google-licenses/* "$ANDROID_HOME/licenses/"
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-16
+    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-25
+
+licenses:
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+  - 'android-sdk-preview-license-.+'
+
 script:
-  - ./gradlew dependencyCheckAnalyze build
-  - adb shell input keyevent 82
-  - ./gradlew connectedCheck -PdisablePreDex --stacktrace
-after_failure: "cat $TRAVIS_BUILD_DIR/app/gen_build/report/lint-result"
+  - ./gradlew runUnitTests
+  - ./gradlew connectedCheck
