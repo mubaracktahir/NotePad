@@ -38,7 +38,7 @@ licenses:
   - 'android-sdk-preview-license-.+'
 
 script:
-  ./gradlew build connectedCheck
-  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - ./gradlew build connectedCheck
+  - ./gradlew clean build connectedCheck -PdisablePreDex --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
