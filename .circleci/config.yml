@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/code
+    working_directory: ~/mubaracktahir
     docker:
       - image: circleci/android:api-25-alpha
     environment:
@@ -25,12 +25,12 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "notepad/build.gradle" }}
       - run:
-          name: Run Presentation Module Unit Tests
-          command: ./gradlew :presentation:testDebugUnitTest
+          name: Run NotePad Module Unit Tests
+          command: ./gradlew :notepad:testDebugUnitTest
       - store_artifacts:
-          path: presentation/build/reports
+          path: notepad/build/reports
       - store_test_results:
-          path: presentation/build/test-results
+          path: notepad/build/test-results
       - run:
           name: Run Domain Module Unit Tests
           command: ./gradlew :domain:test
@@ -49,4 +49,4 @@ jobs:
           name: Run Lint Test
           command: ./gradlew lint
       - store_artifacts:
-          path: presentation/build/reports
+          path: notepad/build/reports
