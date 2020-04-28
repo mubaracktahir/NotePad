@@ -88,7 +88,7 @@ public class AddNewNote extends AppCompatActivity {
                 note.setDescription(editText.getText().toString());
                 note.setCategory(option);
                 note.setDate("3:40 pm");
-
+                Note n = new Note();
                 mainActivity = new MainActivity();
                 mainActivity.addNewNote(note,1,0);
 
