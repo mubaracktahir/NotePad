@@ -1,7 +1,7 @@
 ---
 language: android
 jdk: oraclejdk8
-sudo: true
+sudo: false
 os: linux
 dist: trusty
 
@@ -36,3 +36,9 @@ licenses:
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
   - 'android-sdk-preview-license-.+'
+
+script:
+  ./gradlew build connectedCheck
+  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
