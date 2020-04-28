@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+task runUnitTests(dependsOn: [':app:testDebugUnitTest']) {
+
+description 'Run all unit tests'
+
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -25,6 +31,8 @@ android {
     lintOptions {
         abortOnError false
     }
+
+}
 }
 
 dependencies {
