@@ -36,8 +36,3 @@ licenses:
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
   - 'android-sdk-preview-license-.+'
-script:
-  - ./gradlew runUnitTests
-  - ./gradlew connectedCheck
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
