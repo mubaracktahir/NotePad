@@ -1,15 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
-task runUnitTests(dependsOn: [':app:testDebugUnitTest']) {
-
-description 'Run all unit tests'
-
-}
-
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mubaracktahir.notepad"
         minSdkVersion 18
@@ -31,8 +25,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-}
 }
 
 dependencies {
