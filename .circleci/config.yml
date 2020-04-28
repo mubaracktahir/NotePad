@@ -1,11 +1,7 @@
-# Android CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-android/ for more details
-#
 version: 2
 jobs:
   build:
-    working_directory: ~/mubaracktahir
+    working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
     environment:
@@ -13,7 +9,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "notepad/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       #      - run:
       #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
       #         command: sudo chmod +x ./gradlew
@@ -23,30 +19,13 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "notepad/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run NotePad Module Unit Tests
-          command: ./gradlew :notepad:testDebugUnitTest
-      - store_artifacts:
-          path: notepad/build/reports
-      - store_test_results:
-          path: notepad/build/test-results
-      - run:
-          name: Run Domain Module Unit Tests
-          command: ./gradlew :domain:test
-      - store_artifacts:
-          path: domain/build/reports
-      - store_test_results:
-          path: domain/build/test-results
-      - run:
-          name: Run Data Module Unit Tests
-          command: ./gradlew :data:testDebugUnitTest
-      - store_artifacts:
-          path: data/build/reports
-      - store_test_results:
-          path: data/build/test-results
-      - run:
-          name: Run Lint Test
-          command: ./gradlew lint
-      - store_artifacts:
-          path: notepad/build/reports
+          name: Run Tests
+          command: ./gradlew lint test
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
