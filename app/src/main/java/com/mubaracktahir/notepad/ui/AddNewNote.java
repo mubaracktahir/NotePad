@@ -91,7 +91,6 @@ public class AddNewNote extends AppCompatActivity {
                 Note n = new Note();
                 mainActivity = new MainActivity();
                 mainActivity.addNewNote(note,1,0);
-
                 option = MainActivity.UNCAT;
             }
 
